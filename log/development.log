@@ -1264,3 +1264,197 @@ Migrating to CreatePurchases (20180701134131)
   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20180701134131"]]
   [1m[36m (6.0ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (6.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (4.3ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateProviders (20180701134111)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "providers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "address" varchar(255), "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20180701134111"]]
+  [1m[36m (5.3ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCostumers (20180701134124)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "costumers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20180701134124"]]
+  [1m[36m (4.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePurchases (20180701134131)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "purchases" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider_id" integer, "costumer_id" integer, "quantity" integer, "description" varchar(255), "unity_price" float, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_purchases_on_provider_id" ON "purchases" ("provider_id")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_purchases_on_costumer_id" ON "purchases" ("costumer_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20180701134131"]]
+  [1m[36m (4.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/purchases" for 127.0.0.1 at 2018-07-01 14:15:06 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PurchasesController#index as HTML
+  [1m[35mPurchase Load (0.1ms)[0m  SELECT "purchases".* FROM "purchases"
+  Rendered purchases/index.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 58ms (Views: 48.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2018-07-01 14:15:07 -0300
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:07 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:07 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:07 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:07 -0300
+
+
+Started GET "/purchases" for 127.0.0.1 at 2018-07-01 14:15:14 -0300
+Processing by PurchasesController#index as HTML
+  [1m[36mPurchase Load (0.2ms)[0m  [1mSELECT "purchases".* FROM "purchases"[0m
+  Rendered purchases/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2018-07-01 14:15:14 -0300
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:14 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:14 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:14 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:14 -0300
+
+
+Started POST "/purchases" for 127.0.0.1 at 2018-07-01 14:15:16 -0300
+Processing by PurchasesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uuayiNhMcUSuWydXPM65qxLQNI32E2Nu9Ubqo4KC3u0=", "commit"=>"Process file"}
+Redirected to http://localhost:3000/purchases
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/purchases" for 127.0.0.1 at 2018-07-01 14:15:16 -0300
+Processing by PurchasesController#index as HTML
+  [1m[35mPurchase Load (0.2ms)[0m  SELECT "purchases".* FROM "purchases"
+  Rendered purchases/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2018-07-01 14:15:16 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:16 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:16 -0300
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:16 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:16 -0300
+
+
+Started POST "/purchases" for 127.0.0.1 at 2018-07-01 14:15:23 -0300
+Processing by PurchasesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uuayiNhMcUSuWydXPM65qxLQNI32E2Nu9Ubqo4KC3u0=", "purchase"=>{"process_file"=>#<ActionDispatch::Http::UploadedFile:0x0055999b6e1880 @tempfile=#<Tempfile:/tmp/RackMultipart20180701-9683-e4la64>, @original_filename="index.html.erb", @content_type="application/octet-stream", @headers="Content-Disposition: form-data; name=\"purchase[process_file]\"; filename=\"index.html.erb\"\r\nContent-Type: application/octet-stream\r\n">}, "commit"=>"Process file"}
+Redirected to http://localhost:3000/purchases
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/purchases" for 127.0.0.1 at 2018-07-01 14:15:23 -0300
+Processing by PurchasesController#index as HTML
+  [1m[36mPurchase Load (0.2ms)[0m  [1mSELECT "purchases".* FROM "purchases"[0m
+  Rendered purchases/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2018-07-01 14:15:23 -0300
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:23 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:23 -0300
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:23 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:23 -0300
+
+
+Started POST "/purchases" for 127.0.0.1 at 2018-07-01 14:15:40 -0300
+Processing by PurchasesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uuayiNhMcUSuWydXPM65qxLQNI32E2Nu9Ubqo4KC3u0=", "purchase"=>{"process_file"=>#<ActionDispatch::Http::UploadedFile:0x0055999a85b248 @tempfile=#<Tempfile:/tmp/RackMultipart20180701-9683-1el96gx>, @original_filename="dados.txt", @content_type="text/plain", @headers="Content-Disposition: form-data; name=\"purchase[process_file]\"; filename=\"dados.txt\"\r\nContent-Type: text/plain\r\n">}, "commit"=>"Process file"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mProvider Load (0.1ms)[0m  [1mSELECT "providers".* FROM "providers" WHERE "providers"."name" = 'Bob''s Pizza' AND "providers"."address" = '987 Fake St' ORDER BY "providers"."id" ASC LIMIT 1[0m
+  [1m[35mSQL (2.5ms)[0m  INSERT INTO "providers" ("address", "created_at", "name", "updated_at") VALUES (?, ?, ?, ?)  [["address", "987 Fake St"], ["created_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00], ["name", "Bob's Pizza"], ["updated_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00]]
+  [1m[36mCostumer Load (0.1ms)[0m  [1mSELECT "costumers".* FROM "costumers" WHERE "costumers"."name" = 'João Silva' ORDER BY "costumers"."id" ASC LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "costumers" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00], ["name", "João Silva"], ["updated_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00]]
+  [1m[36mProvider Load (0.2ms)[0m  [1mSELECT "providers".* FROM "providers" WHERE "providers"."id" = ? ORDER BY "providers"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mCostumer Load (0.1ms)[0m  SELECT "costumers".* FROM "costumers" WHERE "costumers"."id" = ? ORDER BY "costumers"."id" ASC LIMIT 1  [["id", 1]]
+Binary data inserted for `string` type on column `description`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "purchases" ("costumer_id", "created_at", "description", "provider_id", "quantity", "unity_price", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["costumer_id", 1], ["created_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00], ["description", "R$10 off R$20 of food"], ["provider_id", 1], ["quantity", 2], ["unity_price", 10.0], ["updated_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00]]
+  [1m[35mProvider Load (0.1ms)[0m  SELECT "providers".* FROM "providers" WHERE "providers"."name" = 'Tom''s Awesome Shop' AND "providers"."address" = '456 Unreal Rd' ORDER BY "providers"."id" ASC LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "providers" ("address", "created_at", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["address", "456 Unreal Rd"], ["created_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00], ["name", "Tom's Awesome Shop"], ["updated_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00]]
+  [1m[35mCostumer Load (0.1ms)[0m  SELECT "costumers".* FROM "costumers" WHERE "costumers"."name" = 'Amy Pond' ORDER BY "costumers"."id" ASC LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "costumers" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00], ["name", "Amy Pond"], ["updated_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00]]
+  [1m[35mProvider Load (0.1ms)[0m  SELECT "providers".* FROM "providers" WHERE "providers"."id" = ? ORDER BY "providers"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mCostumer Load (0.0ms)[0m  [1mSELECT "costumers".* FROM "costumers" WHERE "costumers"."id" = ? ORDER BY "costumers"."id" ASC LIMIT 1[0m  [["id", 2]]
+Binary data inserted for `string` type on column `description`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "purchases" ("costumer_id", "created_at", "description", "provider_id", "quantity", "unity_price", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["costumer_id", 2], ["created_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00], ["description", "R$30 of awesome for R$10"], ["provider_id", 2], ["quantity", 5], ["unity_price", 10.0], ["updated_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00]]
+  [1m[36mProvider Load (0.1ms)[0m  [1mSELECT "providers".* FROM "providers" WHERE "providers"."name" = 'Sneaker Store Emporium' AND "providers"."address" = '123 Fake St' ORDER BY "providers"."id" ASC LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "providers" ("address", "created_at", "name", "updated_at") VALUES (?, ?, ?, ?)  [["address", "123 Fake St"], ["created_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00], ["name", "Sneaker Store Emporium"], ["updated_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00]]
+  [1m[36mCostumer Load (0.1ms)[0m  [1mSELECT "costumers".* FROM "costumers" WHERE "costumers"."name" = 'Marty McFly' ORDER BY "costumers"."id" ASC LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "costumers" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00], ["name", "Marty McFly"], ["updated_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00]]
+  [1m[36mProvider Load (0.0ms)[0m  [1mSELECT "providers".* FROM "providers" WHERE "providers"."id" = ? ORDER BY "providers"."id" ASC LIMIT 1[0m  [["id", 3]]
+  [1m[35mCostumer Load (0.0ms)[0m  SELECT "costumers".* FROM "costumers" WHERE "costumers"."id" = ? ORDER BY "costumers"."id" ASC LIMIT 1  [["id", 3]]
+Binary data inserted for `string` type on column `description`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "purchases" ("costumer_id", "created_at", "description", "provider_id", "quantity", "unity_price", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["costumer_id", 3], ["created_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00], ["description", "R$20 Sneakers for R$5"], ["provider_id", 3], ["quantity", 1], ["unity_price", 5.0], ["updated_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00]]
+  [1m[35mProvider Load (0.1ms)[0m  SELECT "providers".* FROM "providers" WHERE "providers"."name" = 'Sneaker Store Emporium' AND "providers"."address" = '123 Fake St' ORDER BY "providers"."id" ASC LIMIT 1
+  [1m[36mCostumer Load (0.1ms)[0m  [1mSELECT "costumers".* FROM "costumers" WHERE "costumers"."name" = 'Snake Plissken' ORDER BY "costumers"."id" ASC LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "costumers" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00], ["name", "Snake Plissken"], ["updated_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00]]
+  [1m[36mProvider Load (0.0ms)[0m  [1mSELECT "providers".* FROM "providers" WHERE "providers"."id" = ? ORDER BY "providers"."id" ASC LIMIT 1[0m  [["id", 3]]
+  [1m[35mCostumer Load (0.0ms)[0m  SELECT "costumers".* FROM "costumers" WHERE "costumers"."id" = ? ORDER BY "costumers"."id" ASC LIMIT 1  [["id", 4]]
+Binary data inserted for `string` type on column `description`
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "purchases" ("costumer_id", "created_at", "description", "provider_id", "quantity", "unity_price", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["costumer_id", 4], ["created_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00], ["description", "R$20 Sneakers for R$5"], ["provider_id", 3], ["quantity", 4], ["unity_price", 5.0], ["updated_at", Sun, 01 Jul 2018 17:15:40 UTC +00:00]]
+  [1m[35m (3.5ms)[0m  commit transaction
+Redirected to http://localhost:3000/purchases
+Completed 302 Found in 83ms (ActiveRecord: 9.6ms)
+
+
+Started GET "/purchases" for 127.0.0.1 at 2018-07-01 14:15:40 -0300
+Processing by PurchasesController#index as HTML
+  [1m[36mPurchase Load (0.2ms)[0m  [1mSELECT "purchases".* FROM "purchases"[0m
+  [1m[35mCostumer Load (0.1ms)[0m  SELECT "costumers".* FROM "costumers" WHERE "costumers"."id" = ? ORDER BY "costumers"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mProvider Load (0.1ms)[0m  [1mSELECT "providers".* FROM "providers" WHERE "providers"."id" = ? ORDER BY "providers"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mCostumer Load (0.1ms)[0m  SELECT "costumers".* FROM "costumers" WHERE "costumers"."id" = ? ORDER BY "costumers"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mProvider Load (0.0ms)[0m  [1mSELECT "providers".* FROM "providers" WHERE "providers"."id" = ? ORDER BY "providers"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mCostumer Load (0.1ms)[0m  SELECT "costumers".* FROM "costumers" WHERE "costumers"."id" = ? ORDER BY "costumers"."id" ASC LIMIT 1  [["id", 3]]
+  [1m[36mProvider Load (0.1ms)[0m  [1mSELECT "providers".* FROM "providers" WHERE "providers"."id" = ? ORDER BY "providers"."id" ASC LIMIT 1[0m  [["id", 3]]
+  [1m[35mCostumer Load (0.1ms)[0m  SELECT "costumers".* FROM "costumers" WHERE "costumers"."id" = ? ORDER BY "costumers"."id" ASC LIMIT 1  [["id", 4]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "providers".* FROM "providers" WHERE "providers"."id" = ? ORDER BY "providers"."id" ASC LIMIT 1[0m  [["id", 3]]
+  Rendered purchases/index.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 10ms (Views: 8.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:40 -0300
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:40 -0300
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2018-07-01 14:15:40 -0300
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:40 -0300
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2018-07-01 14:15:40 -0300

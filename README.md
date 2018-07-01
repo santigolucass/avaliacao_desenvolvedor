@@ -36,6 +36,10 @@ No seu navegador, acesse:
 localhost:3000
 ```
 
+### Realizando testes
+
+Para testar o upload + parse de um arquivo no formato padrão, utilize o arquivo "dados.txt" que está na raiz do projeto
+
 
 ### Realizando testes automatizados
 
