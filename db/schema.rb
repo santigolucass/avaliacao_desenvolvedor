@@ -11,6 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20180701134131) do
+
+  create_table "costumers", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "providers", force: true do |t|
+    t.string   "address"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "purchases", force: true do |t|
+    t.integer  "provider_id"
+    t.integer  "costumer_id"
+    t.integer  "quantity"
+    t.string   "description"
+    t.float    "unity_price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "purchases", ["costumer_id"], name: "index_purchases_on_costumer_id"
+  add_index "purchases", ["provider_id"], name: "index_purchases_on_provider_id"
 
 end
