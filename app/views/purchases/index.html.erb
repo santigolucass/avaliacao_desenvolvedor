@@ -1,1 +1,44 @@
-HERE
+<h2>Purchases</h2>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Buyer</th>
+    <th>Description</th>
+    <th>Quantity</th>
+    <th>Unity Price</th>
+    <th>Address</th>
+    <th>Provider</th>
+    <th>Delete</th>
+
+  </tr>
+
+  <% @purchases.each do |purchase| %>
+  <tr>
+    <td><%= purchase.id %></td>
+    <td><%= purchase.costumer.name %></td>
+    <td><%= purchase.description %></td>
+    <td><%= purchase.quantity %></td>
+    <td><%= purchase.unity_price %></td>
+    <td><%= purchase.provider.address %></td>
+    <td><%= purchase.provider.name %></td>
+    <td> <%= link_to 'X',
+    purchase_path(purchase),
+    method: :delete,
+    data: { :confirm => "Are you sure?" }
+     %>
+    </td>
+  </tr>  
+  <% end %>
+</table>
+
+</br>
+
+<div class="btn-group">
+  <%= form_for :purchase, url: purchases_path, html: { multipart: true } do |f| %>
+    <%= f.label :process_file, 'File to Upload' %>
+    </br>
+    <%= f.file_field :process_file,  accept: 'text/plain' %></br>
+    <%= f.submit 'Process file' %>
+  <% end %>
+</div>
