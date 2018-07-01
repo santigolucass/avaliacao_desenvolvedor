@@ -58,6 +58,6 @@ ruby -I test "CAMINHO PARA O ARQUIVO"
 Exemplo:
 
 ```
-ruby -I test test/controllers/purchases.controller.rb
+ruby -I test test/controllers/purchases_controller.rb
 ```
 
